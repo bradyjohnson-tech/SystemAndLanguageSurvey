@@ -1,0 +1,72 @@
+<!-- Date: 11/16/2024 -->
+<!-- Brady Johnson -->
+<!-- IDE: Jetbrains Fleet -->
+<!-- Browser: Microsoft Edge Version 131.0.2903.51 (Official build) (arm64) -->
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Determine Prime Number</title>
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            border: 4px solid blue;
+            padding: 20px;
+            width: 400px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function getPrimeResult() {
+            var number = document.getElementById("inputNumber").value;
+            if(number <= 1 || number >= 10000){
+                document.getElementById("primeResult").innerHTML = "That number is out of range";
+                document.getElementById("primeResult").style.color = "orange";
+                return
+            }
+            var isprime = isPrime(number)
+            if (isprime) {
+                document.getElementById("primeResult").innerHTML = "This number is prime!";
+                document.getElementById("primeResult").style.color = "red";
+            } else {
+                document.getElementById("primeResult").innerHTML = "This number is not prime!";
+                document.getElementById("primeResult").style.color = "blue";
+            }
+        }
+
+        function isPrime(n) {
+            if (n <= 1) return false;
+            if (n <= 3) return true;
+            if (n % 2 === 0 || n % 3 === 0) return false;
+            for (let i = 5; i * i <= n; i += 6) {
+                if (n % i === 0 || n % (i + 2) === 0) return false;
+            }
+            return true;
+        }
+
+    </script>
+</head>
+<body>
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <h1 style="color:red">Prime Checker</h1>
+            <label>Enter a number from 2 to 9999:</label>
+            <input type="number" id="inputNumber"> <br>
+            <button onclick="getPrimeResult()">Submit</button>
+            <p id="primeResult"></p>
+        </div>
+    </div>
+</body>
+</html>
